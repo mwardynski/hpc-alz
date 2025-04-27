@@ -30,7 +30,7 @@ def objective(trial):
 
     
     lr = 0.01
-    batch_size = 2
+    batch_size = 1
     epochs = 30
     hidden1 = 128
     hidden2 = 128

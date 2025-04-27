@@ -113,6 +113,7 @@ class HGCN():
     def __init__(self, params):
         self.params = params
         self.num_nodes = 166
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     def find_k3(self, G):
         triangles_list = set()
@@ -192,6 +193,8 @@ class HGCN():
         for epoch in range(epochs):
             total_loss = 0
             for batch in loader:
+                batch.to(self.device)
+                
                 num_original_nodes = batch.num_nodes - batch.num_hyperedges.sum()
                 
                 optimizer.zero_grad()
@@ -207,16 +210,9 @@ class HGCN():
         model.eval()
         with torch.no_grad():
             for i, batch in enumerate(loader):
+                batch.to(self.device)
                 out = model(batch.x, batch.edge_index)
                 return out.reshape(-1)[:self.num_nodes].cpu().numpy()
-
-    def prepare_dataset(self, dataset, num_cores):
-        converted_dataset = self.convert_dataset(dataset, num_cores)
-
-        print(f"converted_dataset size: {len(converted_dataset.items())}")
-        
-        return converted_dataset
-
 
     def output_subject_result(self, subj, t0_concentration, t1_concentration, t1_concentration_pred, mse, pcc, results):
         reg_err = np.abs(t1_concentration_pred - t1_concentration)
@@ -242,7 +238,7 @@ class HGCN():
         test_loader = DataLoader(list(test_set.values()), batch_size=1)
 
         model = HypergraphResNet(num_nodes=self.num_nodes, hidden1=self.params.hidden1, hidden2=self.params.hidden2, dropout=self.params.dropout)
-        # model = HypergraphNet()
+        model = model.to(self.device)
         optimizer = torch.optim.Adam(model.parameters(), lr=self.params.lr)
         self.train_model(model, optimizer, train_loader, self.params.epochs)
         
@@ -324,7 +320,7 @@ def exec_sim(dataset, category, output_res, output_mat, lr, batch_size, epochs, 
     hgcn = HGCN(params)
 
     num_cores = 10
-    converted_dataset = hgcn.prepare_dataset(dataset, num_cores)
+    converted_dataset = hgcn.convert_dataset(dataset, num_cores)
 
     n_fold = len(converted_dataset.keys())
     test_set_size = 1
@@ -332,6 +328,8 @@ def exec_sim(dataset, category, output_res, output_mat, lr, batch_size, epochs, 
     total_time = time()
     results =  Results()
     
+    print(f"*** Starting training of {n_fold} folds using {hgcn.device} ***")
+
     for i in tqdm(range(n_fold)):   
         train_set = {}
         test_set = {}
