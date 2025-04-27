@@ -30,13 +30,14 @@ def objective(trial):
 
     
     lr = 0.01
+    batch_size = 2
     epochs = 30
     hidden1 = 128
     hidden2 = 128
     dropout = 0.5
     hyperedge_value = 'ones'
     
-    return simulation_HGCN.exec_sim(dataset, category, output_res, output_mat, lr, epochs, hidden1, hidden2, dropout, hyperedge_value)
+    return simulation_HGCN.exec_sim(dataset, category, output_res, output_mat, lr, batch_size, epochs, hidden1, hidden2, dropout, hyperedge_value)
 
 if __name__=="__main__":
     category = sys.argv[1] if len(sys.argv) > 1 else 'ALL'

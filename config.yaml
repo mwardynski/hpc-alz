@@ -1,5 +1,6 @@
 paths:
-  dataset_dir: "/net/afscra/people/plgmwardynski/ADNI_derivatives/"
+  # dataset_dir: "/net/afscra/people/plgmwardynski/ADNI_derivatives/"
+  dataset_dir: "/Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives/"
   atlas_path: "MP-spreading-prediction/utilities/AAL3v1.nii.gz"
   atlas_pets: "MP-spreading-prediction/utilities/AAL3v1_1mm.nii.gz"               # NOTE: for DTI/ANAT the low resolution atlas has been used, while for the pets the high resolution
   subject: 'all'                                # if 'all' (aka None): scripts are run on the whole dataset 

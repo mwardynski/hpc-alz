@@ -11,6 +11,8 @@ from scipy.stats import pearsonr as pearson_corr_coef
 from sklearn.metrics import mean_squared_error
 from time import time
 from torch_geometric.data import Data
+from torch_geometric.loader import DataLoader
+from torch_geometric.nn import HypergraphConv
 from tqdm import tqdm 
 from utils import *
 from utils_vis import *
@@ -24,7 +26,8 @@ import json
 import yaml
 import torch.nn.functional as F
 
-from torch_geometric.nn import HypergraphConv
+
+
 
 
 # PARAMETERS to control from Optuna:
@@ -46,9 +49,10 @@ date = datetime.now().strftime('%y-%m-%d_%H:%M:%S')
 digits = 4
 
 class Params():
-    def __init__(self, category, lr, epochs, hidden1, hidden2, dropout, hyperedge_value):
+    def __init__(self, category, lr, batch_size, epochs, hidden1, hidden2, dropout, hyperedge_value):
         self.category = category
         self.lr = lr
+        self.batch_size = batch_size
         self.epochs = epochs
         self.hidden1 = hidden1
         self.hidden2 = hidden2
@@ -92,17 +96,17 @@ class HypergraphResNet(torch.nn.Module):
         self.conv3 = HypergraphConv(hidden2, 1)
         self.dropout = dropout
         self.num_nodes = num_nodes
-    def forward(self, x, edge_index):
+    def forward(self, x, edge_index, num_original_nodes=None):
         # Split original baseline vs. hyperedge nodes
-        baseline = x[:self.num_nodes]      # shape [N,1]
+        baseline = x      # shape [N,1]
         h = x                        # shape [N+E,1]
         h = F.relu(self.conv1(h, edge_index))
         h = F.dropout(h, p=self.dropout, training=self.training)
         h = F.relu(self.conv2(h, edge_index))
         h = F.dropout(h, p=self.dropout, training=self.training)
-        delta = self.conv3(h, edge_index)[:self.num_nodes]  # only keep original nodes
+        delta = self.conv3(h, edge_index)  # only keep original nodes
         # Residual: predict change on top of baseline  
-        return baseline + delta
+        return baseline[:num_original_nodes] + delta[:num_original_nodes]
 
 class HGCN():
 
@@ -174,7 +178,7 @@ class HGCN():
             # Step 4: Define features and prepare the data
             x_input = torch.cat([torch.from_numpy(baseline_AB_lvl.reshape(-1, 1)), torch.ones((num_hyperedges, 1))], dim=0).float()  # Include virtual nodes
             y = torch.from_numpy(followup_AB_lvl.reshape(-1, 1)).float()
-            data = Data(x=x_input, edge_index=edge_index, y=y)
+            data = Data(x=x_input, edge_index=edge_index, y=y, num_hyperedges=num_hyperedges)
 
             converted_dataset[key] = data
         
@@ -183,24 +187,28 @@ class HGCN():
     
 
 
-    def train_model(self, model, optimizer, graphs, epochs=30):
+    def train_model(self, model, optimizer, loader, epochs=30):
         model.train()
         for epoch in range(epochs):
             total_loss = 0
-            for data in graphs:
+            for batch in loader:
+                num_original_nodes = batch.num_nodes - batch.num_hyperedges.sum()
+                
                 optimizer.zero_grad()
-                out = model(data.x, data.edge_index)
-                loss = F.mse_loss(out[:self.num_nodes], data.y)
+                
+                out = model(batch.x, batch.edge_index, num_original_nodes)
+                
+                loss = F.mse_loss(out, batch.y)
                 loss.backward()
                 optimizer.step()
                 total_loss += loss.item()
 
-    def evaluate_model(self, model, graphs):
+    def evaluate_model(self, model, loader):
         model.eval()
         with torch.no_grad():
-            for i, data in enumerate(graphs):
-                out = model(data.x, data.edge_index)
-                return out.reshape(-1)[:self.num_nodes].numpy()
+            for i, batch in enumerate(loader):
+                out = model(batch.x, batch.edge_index)
+                return out.reshape(-1)[:self.num_nodes].cpu().numpy()
 
     def prepare_dataset(self, dataset, num_cores):
         converted_dataset = self.convert_dataset(dataset, num_cores)
@@ -225,17 +233,20 @@ class HGCN():
 
     def extract_data_from_test_set(self, test_set):
         subj = list(test_set.keys())[0]
-        x = test_set[subj].x.reshape(-1)[:self.num_nodes].numpy()
-        y = test_set[subj].y.reshape(-1).numpy()
+        x = test_set[subj].x.reshape(-1)[:self.num_nodes].cpu().numpy()
+        y = test_set[subj].y.reshape(-1).cpu().numpy()
         return subj, x, y
 
     def perform_single_run(self, train_set, test_set, results):
+        train_loader = DataLoader(list(train_set.values()), batch_size=self.params.batch_size)
+        test_loader = DataLoader(list(test_set.values()), batch_size=1)
+
         model = HypergraphResNet(num_nodes=self.num_nodes, hidden1=self.params.hidden1, hidden2=self.params.hidden2, dropout=self.params.dropout)
         # model = HypergraphNet()
         optimizer = torch.optim.Adam(model.parameters(), lr=self.params.lr)
-        self.train_model(model, optimizer, train_set.values(), self.params.epochs)
+        self.train_model(model, optimizer, train_loader, self.params.epochs)
         
-        y_pred = self.evaluate_model(model, test_set.values())
+        y_pred = self.evaluate_model(model, test_loader)
         subj, x, y = self.extract_data_from_test_set(test_set)
 
         mse = mean_squared_error(y, y_pred)
@@ -306,9 +317,9 @@ class HGCN():
         logging.info(f"Results saved in {filename}")
         print(f"Results saved in {filename}")
 
-def exec_sim(dataset, category, output_res, output_mat, lr, epochs, hidden1, hidden2, dropout, hyperedge_value):
+def exec_sim(dataset, category, output_res, output_mat, lr, batch_size, epochs, hidden1, hidden2, dropout, hyperedge_value):
 
-    params = Params(category, lr, epochs, hidden1, hidden2, dropout, hyperedge_value)
+    params = Params(category, lr, batch_size, epochs, hidden1, hidden2, dropout, hyperedge_value)
 
     hgcn = HGCN(params)
 
