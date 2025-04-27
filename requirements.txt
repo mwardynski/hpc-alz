@@ -1,0 +1,8 @@
+numpy==1.26.4
+optuna
+prettytable
+pyyaml
+scikit-learn
+seaborn
+torch
+torch-geometric
