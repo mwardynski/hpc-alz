@@ -96,17 +96,20 @@ class HypergraphResNet(torch.nn.Module):
         self.conv3 = HypergraphConv(hidden2, 1)
         self.dropout = dropout
         self.num_nodes = num_nodes
-    def forward(self, x, edge_index, num_original_nodes=None):
-        # Split original baseline vs. hyperedge nodes
-        baseline = x      # shape [N,1]
-        h = x                        # shape [N+E,1]
+    def forward(self, x, edge_index, original_node_ranges=None):
+        
+        baseline = x
+        h = x
         h = F.relu(self.conv1(h, edge_index))
         h = F.dropout(h, p=self.dropout, training=self.training)
         h = F.relu(self.conv2(h, edge_index))
         h = F.dropout(h, p=self.dropout, training=self.training)
-        delta = self.conv3(h, edge_index)  # only keep original nodes
-        # Residual: predict change on top of baseline  
-        return baseline[:num_original_nodes] + delta[:num_original_nodes]
+        delta = self.conv3(h, edge_index)
+
+        baseline = torch.cat([baseline[start:end] for start, end in original_node_ranges])
+        delta = torch.cat([delta[start:end] for start, end in original_node_ranges])
+
+        return baseline + delta
 
 class HGCN():
 
@@ -177,16 +180,36 @@ class HGCN():
             edge_index = torch.stack([row, col], dim=0)  # Shape [2, num_edges]
 
             # Step 4: Define features and prepare the data
-            x_input = torch.cat([torch.from_numpy(baseline_AB_lvl.reshape(-1, 1)), torch.ones((num_hyperedges, 1))], dim=0).float()  # Include virtual nodes
+            x_input = torch.cat([
+                torch.from_numpy(baseline_AB_lvl.reshape(-1, 1)),
+                self.init_hyperedges(num_hyperedges)
+                ], dim=0).float()  # Include virtual nodes
             y = torch.from_numpy(followup_AB_lvl.reshape(-1, 1)).float()
             data = Data(x=x_input, edge_index=edge_index, y=y, num_hyperedges=num_hyperedges)
 
             converted_dataset[key] = data
         
         return converted_dataset
-
     
+    def init_hyperedges(self, num_hyperedges):
+        hyperedges_init_value = None
 
+        if self.params.hyperedge_value == "zeros":
+            hyperedges_init_value = torch.zeros((num_hyperedges, 1))
+        elif self.params.hyperedge_value == "proportional":
+            hyperedges_init_value = torch.full((num_hyperedges, 1), 1/3)
+        else:
+            hyperedges_init_value = torch.ones((num_hyperedges, 1))
+
+        return hyperedges_init_value
+    
+    def calc_original_node_ranges(self, original_nodes_offset, num_hyperedges):
+        starts = [0]
+        for val in num_hyperedges:
+            starts.append(starts[-1] + original_nodes_offset + val.item())
+
+        ranges = [(s, s + original_nodes_offset) for s in starts]
+        return ranges[:-1]
 
     def train_model(self, model, optimizer, loader, epochs=30):
         model.train()
@@ -195,11 +218,11 @@ class HGCN():
             for batch in loader:
                 batch.to(self.device)
                 
-                num_original_nodes = batch.num_nodes - batch.num_hyperedges.sum()
+                original_node_ranges = self.calc_original_node_ranges(self.num_nodes, batch.num_hyperedges)
                 
                 optimizer.zero_grad()
                 
-                out = model(batch.x, batch.edge_index, num_original_nodes)
+                out = model(batch.x, batch.edge_index, original_node_ranges)
                 
                 loss = F.mse_loss(out, batch.y)
                 loss.backward()
@@ -211,8 +234,9 @@ class HGCN():
         with torch.no_grad():
             for i, batch in enumerate(loader):
                 batch.to(self.device)
-                out = model(batch.x, batch.edge_index)
-                return out.reshape(-1)[:self.num_nodes].cpu().numpy()
+                original_node_ranges = [(0, self.num_nodes)]
+                out = model(batch.x, batch.edge_index, original_node_ranges)
+                return out.reshape(-1).cpu().numpy()
 
     def output_subject_result(self, subj, t0_concentration, t1_concentration, t1_concentration_pred, mse, pcc, results):
         reg_err = np.abs(t1_concentration_pred - t1_concentration)
@@ -319,7 +343,7 @@ def exec_sim(dataset, category, output_res, output_mat, lr, batch_size, epochs, 
 
     hgcn = HGCN(params)
 
-    num_cores = 10
+    num_cores = os.cpu_count()
     converted_dataset = hgcn.convert_dataset(dataset, num_cores)
 
     n_fold = len(converted_dataset.keys())
