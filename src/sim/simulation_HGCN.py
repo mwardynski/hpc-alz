@@ -5,6 +5,7 @@ import torch
 
 from datetime import datetime
 import re
+import sys
 from scipy.stats import pearsonr as pearson_corr_coef
 from sklearn.metrics import mean_squared_error
 from time import time
@@ -259,10 +260,10 @@ def exec_sim(dataset, category, output_res, output_mat, lr, batch_size, epochs, 
     total_time = time()
     results =  Results()
     
-    print(f"*** Starting training of {n_fold} folds using {hgcn.device} ***")
+    print(f"*** Starting training of {n_fold} folds using {hgcn.device} ***", file=sys.stderr)
 
     for i in range(n_fold):
-        print(f"{i*100//(n_fold)}%", end=" " if i < n_fold - 1 else "\n")
+        print(f"{i*100//(n_fold)}%", end=" " if i < n_fold - 1 else "\n", file=sys.stderr)
         
         train_set = {}
         test_set = {}
