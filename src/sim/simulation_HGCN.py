@@ -1,16 +1,13 @@
 import logging
-import networkx as nx
 import numpy as np
 import os
 import torch
 
-from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime
 import re
 from scipy.stats import pearsonr as pearson_corr_coef
 from sklearn.metrics import mean_squared_error
 from time import time
-from torch_geometric.data import Data
 from torch_geometric.loader import DataLoader
 from torch_geometric.nn import HypergraphConv
 from tqdm import tqdm 
@@ -33,11 +30,10 @@ import torch.nn.functional as F
 # PARAMETERS to control from Optuna:
 # lr
 # batch size
+# epochs number
 # hidden layer width
 # hidden layers number
 # dropout
-# values in hyperedges
-# epochs number
 
 
 # to use as GAT, set use_attention=True
@@ -49,7 +45,7 @@ date = datetime.now().strftime('%y-%m-%d_%H:%M:%S')
 digits = 4
 
 class Params():
-    def __init__(self, category, lr, batch_size, epochs, hidden1, hidden2, dropout, hyperedge_value):
+    def __init__(self, category, lr, batch_size, epochs, hidden1, hidden2, dropout):
         self.category = category
         self.lr = lr
         self.batch_size = batch_size
@@ -57,7 +53,6 @@ class Params():
         self.hidden1 = hidden1
         self.hidden2 = hidden2
         self.dropout = dropout
-        self.hyperedge_value = hyperedge_value
 
 
 class Results():
@@ -117,91 +112,6 @@ class HGCN():
         self.params = params
         self.num_nodes = 166
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-    def find_k3(self, G):
-        triangles_list = set()
-        triangles = [clique for clique in nx.enumerate_all_cliques(G) if len(clique) == 3]
-        for triangle in triangles:
-            triangles_list.add(tuple(sorted(triangle)))
-        triangles_list = [list(tri) for tri in triangles_list]
-
-        return triangles_list
-
-    def import_connectome(self, connectome_path, no_weights):
-        adj_matrix = drop_data_in_connect_matrix(load_matrix(connectome_path))
-
-        if no_weights:
-            adj_matrix[adj_matrix != 0.0] = 1.0
-
-        G = nx.from_numpy_array(adj_matrix)
-        triangles_list = self.find_k3(G)
-
-        return adj_matrix, triangles_list
-
-    def split_dict(self, d, num_parts):
-        items = list(d.items())
-        chunk_size = (len(items) + num_parts - 1) // num_parts
-        return [dict(items[i:i + chunk_size]) for i in range(0, len(items), chunk_size)]
-
-    def convert_dataset(self, dataset, num_cores):
-        total_start_time = time()
-        subdatasets = self.split_dict(dataset, num_cores)
-
-        converted_dataset = {}
-
-        with ProcessPoolExecutor(max_workers=num_cores) as executor:
-            futures = [executor.submit(self.convert_subdataset, subdataset) for subdataset in subdatasets]
-
-            for future in as_completed(futures):
-                converted_dataset.update(future.result())
-
-        total_convert_time = time() - total_start_time
-        print(f"*** Convesion of {len(converted_dataset.items())} items done in {total_convert_time} ***")
-
-        return converted_dataset
-
-
-
-    def convert_subdataset(self, subdataset):
-        converted_dataset = {}
-
-        for key, el in subdataset.items():
-            
-            adj_matrix_raw, hyperedges = self.import_connectome(el['CM'], True)
-            baseline_AB_lvl = load_matrix(el['baseline'])
-            followup_AB_lvl = load_matrix(el['followup'])
-
-            adj_matrix = torch.from_numpy(adj_matrix_raw)
-            num_nodes = adj_matrix.size(0)
-            num_hyperedges = len(hyperedges)
-            row = torch.tensor([node for clique in hyperedges for node in clique])  # Nodes
-            col = torch.arange(num_hyperedges).repeat_interleave(torch.tensor([len(clique) for clique in hyperedges])) + num_nodes
-            # Virtual hyperedge nodes
-            edge_index = torch.stack([row, col], dim=0)  # Shape [2, num_edges]
-
-            # Step 4: Define features and prepare the data
-            x_input = torch.cat([
-                torch.from_numpy(baseline_AB_lvl.reshape(-1, 1)),
-                self.init_hyperedges(num_hyperedges)
-                ], dim=0).float()  # Include virtual nodes
-            y = torch.from_numpy(followup_AB_lvl.reshape(-1, 1)).float()
-            data = Data(x=x_input, edge_index=edge_index, y=y, num_hyperedges=num_hyperedges)
-
-            converted_dataset[key] = data
-        
-        return converted_dataset
-    
-    def init_hyperedges(self, num_hyperedges):
-        hyperedges_init_value = None
-
-        if self.params.hyperedge_value == "zeros":
-            hyperedges_init_value = torch.zeros((num_hyperedges, 1))
-        elif self.params.hyperedge_value == "proportional":
-            hyperedges_init_value = torch.full((num_hyperedges, 1), 1/3)
-        else:
-            hyperedges_init_value = torch.ones((num_hyperedges, 1))
-
-        return hyperedges_init_value
     
     def calc_original_node_ranges(self, original_nodes_offset, num_hyperedges):
         starts = [0]
@@ -313,11 +223,11 @@ class HGCN():
         out_file = open(filename, 'w')
         out_file.write(f"Category: {self.params.category}\n")
         out_file.write(f"LR: {self.params.lr}\n")
+        out_file.write(f"Batch: {self.params.batch_size}\n")
         out_file.write(f"Epochs: {self.params.epochs}\n")
         out_file.write(f"Hidden1: {self.params.hidden1}\n")
         out_file.write(f"Hidden2: {self.params.hidden2}\n")
         out_file.write(f"Dropout: {self.params.dropout}\n")
-        out_file.write(f"Hyperedge value: {self.params.hyperedge_value}\n")
         out_file.write(f"Subjects: {len(dataset.keys())}\n")
         out_file.write(f"Total time (s): {format(total_time, '.2f')}\n")
         out_file.write(results.pt_avg.get_string()+'\n')
@@ -326,27 +236,24 @@ class HGCN():
         logging.info('***********************')
         logging.info(f"Category: {self.params.category}")
         logging.info(f"LR: {self.params.lr}\n")
+        logging.info(f"Batch: {self.params.batch_size}\n")
         logging.info(f"Epochs: {self.params.epochs}\n")
         logging.info(f"Hidden1: {self.params.hidden1}\n")
         logging.info(f"Hidden2: {self.params.hidden2}\n")
         logging.info(f"Dropout: {self.params.dropout}\n")
-        logging.info(f"Hyperedge value: {self.params.hyperedge_value}\n")
         logging.info(f"Subjects: {len(dataset.keys())}")
         logging.info(f"Total time (s): {format(total_time, '.2f')}")
         logging.info('***********************')
         logging.info(f"Results saved in {filename}")
         print(f"Results saved in {filename}")
 
-def exec_sim(dataset, category, output_res, output_mat, lr, batch_size, epochs, hidden1, hidden2, dropout, hyperedge_value):
+def exec_sim(dataset, category, output_res, output_mat, lr, batch_size, epochs, hidden1, hidden2, dropout):
 
-    params = Params(category, lr, batch_size, epochs, hidden1, hidden2, dropout, hyperedge_value)
+    params = Params(category, lr, batch_size, epochs, hidden1, hidden2, dropout)
 
     hgcn = HGCN(params)
 
-    num_cores = os.cpu_count()
-    converted_dataset = hgcn.convert_dataset(dataset, num_cores)
-
-    n_fold = len(converted_dataset.keys())
+    n_fold = len(dataset.keys())
     test_set_size = 1
 
     total_time = time()
@@ -354,21 +261,23 @@ def exec_sim(dataset, category, output_res, output_mat, lr, batch_size, epochs, 
     
     print(f"*** Starting training of {n_fold} folds using {hgcn.device} ***")
 
-    for i in tqdm(range(n_fold)):   
+    for i in range(n_fold):
+        print(f"{i*100//(n_fold)}%", end=" " if i < n_fold - 1 else "\n")
+        
         train_set = {}
         test_set = {}
         
         counter = 0
-        for k in converted_dataset.keys():
+        for k in dataset.keys():
             # NOTE: dataset keys are subjects paths
             if not os.path.exists(k+'train/'):
                 os.makedirs(k+'train/')
             if not os.path.exists(k+'test/'):
                 os.makedirs(k+'test/')
             if counter >= i and counter < test_set_size+i:
-                test_set[k] = converted_dataset[k]
+                test_set[k] = dataset[k]
             else:
-                train_set[k] = converted_dataset[k]
+                train_set[k] = dataset[k]
             counter += 1    
 
         hgcn.perform_single_run(train_set, test_set, results)
