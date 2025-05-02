@@ -46,9 +46,10 @@ date = datetime.now().strftime('%y-%m-%d_%H:%M:%S')
 digits = 4
 
 class Params():
-    def __init__(self, category, lr, batch_size, epochs, hidden1, hidden2, dropout):
+    def __init__(self, category, lr, weight_decay, batch_size, epochs, hidden1, hidden2, dropout):
         self.category = category
         self.lr = lr
+        self.weight_decay = weight_decay
         self.batch_size = batch_size
         self.epochs = epochs
         self.hidden1 = hidden1
@@ -90,15 +91,24 @@ class HypergraphResNet(torch.nn.Module):
         self.conv1 = HypergraphConv(1, hidden1)
         self.conv2 = HypergraphConv(hidden1, hidden2)
         self.conv3 = HypergraphConv(hidden2, 1)
+        self.bn1 = torch.nn.BatchNorm1d(hidden1)
+        self.bn2 = torch.nn.BatchNorm1d(hidden2)
         self.dropout = dropout
         self.num_nodes = num_nodes
     def forward(self, x, edge_index, original_node_ranges=None):
         
+
+
         baseline = x
         h = x
-        h = F.relu(self.conv1(h, edge_index))
+        h = self.conv1(h, edge_index)
+        h = self.bn1(h)
+        h = F.relu(h)
         h = F.dropout(h, p=self.dropout, training=self.training)
-        h = F.relu(self.conv2(h, edge_index))
+        
+        h = self.conv2(h, edge_index)
+        h = self.bn2(h)
+        h = F.relu(h)
         h = F.dropout(h, p=self.dropout, training=self.training)
         delta = self.conv3(h, edge_index)
 
@@ -174,7 +184,7 @@ class HGCN():
 
         model = HypergraphResNet(num_nodes=self.num_nodes, hidden1=self.params.hidden1, hidden2=self.params.hidden2, dropout=self.params.dropout)
         model = model.to(self.device)
-        optimizer = torch.optim.Adam(model.parameters(), lr=self.params.lr)
+        optimizer = torch.optim.Adam(model.parameters(), lr=self.params.lr, weight_decay=self.params.weight_decay)
         self.train_model(model, optimizer, train_loader, self.params.epochs)
         
         y_pred = self.evaluate_model(model, test_loader)
@@ -248,9 +258,9 @@ class HGCN():
         logging.info(f"Results saved in {filename}")
         print(f"Results saved in {filename}")
 
-def exec_sim(dataset, category, output_res, output_mat, lr, batch_size, epochs, hidden1, hidden2, dropout):
+def exec_sim(dataset, category, output_res, output_mat, lr, weight_decay, batch_size, epochs, hidden1, hidden2, dropout):
 
-    params = Params(category, lr, batch_size, epochs, hidden1, hidden2, dropout)
+    params = Params(category, lr, weight_decay, batch_size, epochs, hidden1, hidden2, dropout)
 
     hgcn = HGCN(params)
 
