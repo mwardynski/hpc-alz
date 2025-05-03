@@ -2,6 +2,7 @@ import logging
 import numpy as np
 import os
 import torch
+import torch_geometric
 
 from datetime import datetime
 import re
@@ -91,8 +92,6 @@ class HypergraphResNet(torch.nn.Module):
         self.conv1 = HypergraphConv(1, hidden1)
         self.conv2 = HypergraphConv(hidden1, hidden2)
         self.conv3 = HypergraphConv(hidden2, 1)
-        self.bn1 = torch.nn.BatchNorm1d(hidden1)
-        self.bn2 = torch.nn.BatchNorm1d(hidden2)
         self.dropout = dropout
         self.num_nodes = num_nodes
     def forward(self, x, edge_index, original_node_ranges=None):
@@ -102,12 +101,10 @@ class HypergraphResNet(torch.nn.Module):
         baseline = x
         h = x
         h = self.conv1(h, edge_index)
-        h = self.bn1(h)
         h = F.relu(h)
         h = F.dropout(h, p=self.dropout, training=self.training)
         
         h = self.conv2(h, edge_index)
-        h = self.bn2(h)
         h = F.relu(h)
         h = F.dropout(h, p=self.dropout, training=self.training)
         delta = self.conv3(h, edge_index)
@@ -260,8 +257,9 @@ class HGCN():
 
 def exec_sim(dataset, category, output_res, output_mat, lr, weight_decay, batch_size, epochs, hidden1, hidden2, dropout):
 
-    params = Params(category, lr, weight_decay, batch_size, epochs, hidden1, hidden2, dropout)
+    torch_geometric.seed_everything(42)
 
+    params = Params(category, lr, weight_decay, batch_size, epochs, hidden1, hidden2, dropout)
     hgcn = HGCN(params)
 
     n_fold = len(dataset.keys())
