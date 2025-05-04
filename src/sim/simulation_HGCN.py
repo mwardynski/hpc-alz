@@ -47,7 +47,7 @@ date = datetime.now().strftime('%y-%m-%d_%H:%M:%S')
 digits = 4
 
 class Params():
-    def __init__(self, category, lr, weight_decay, batch_size, epochs, hidden1, hidden2, dropout):
+    def __init__(self, category, lr, weight_decay, batch_size, epochs, hidden1, hidden2, hidden3, dropout):
         self.category = category
         self.lr = lr
         self.weight_decay = weight_decay
@@ -55,6 +55,7 @@ class Params():
         self.epochs = epochs
         self.hidden1 = hidden1
         self.hidden2 = hidden2
+        self.hidden3 = hidden3
         self.dropout = dropout
 
 
@@ -87,17 +88,17 @@ class HypergraphNet(torch.nn.Module):
         return x
         
 class HypergraphResNet(torch.nn.Module):
-    def __init__(self, num_nodes, hidden1=64, hidden2=64, dropout=0.2):
+    def __init__(self, num_nodes, hidden1=32, hidden2=64, hidden3=32, dropout=0.2):
         super().__init__()
         self.conv1 = HypergraphConv(1, hidden1)
         self.conv2 = HypergraphConv(hidden1, hidden2)
-        self.conv3 = HypergraphConv(hidden2, 1)
+        self.conv3 = HypergraphConv(hidden2, hidden3)
+        self.conv4 = HypergraphConv(hidden3, 1)
         self.dropout = dropout
         self.num_nodes = num_nodes
+
     def forward(self, x, edge_index, original_node_ranges=None):
         
-
-
         baseline = x
         h = x
         h = self.conv1(h, edge_index)
@@ -107,7 +108,12 @@ class HypergraphResNet(torch.nn.Module):
         h = self.conv2(h, edge_index)
         h = F.relu(h)
         h = F.dropout(h, p=self.dropout, training=self.training)
-        delta = self.conv3(h, edge_index)
+
+        h = self.conv3(h, edge_index)
+        h = F.relu(h)
+        h = F.dropout(h, p=self.dropout, training=self.training)
+
+        delta = self.conv4(h, edge_index)
 
         baseline = torch.cat([baseline[start:end] for start, end in original_node_ranges])
         delta = torch.cat([delta[start:end] for start, end in original_node_ranges])
@@ -179,7 +185,7 @@ class HGCN():
         train_loader = DataLoader(list(train_set.values()), batch_size=self.params.batch_size)
         test_loader = DataLoader(list(test_set.values()), batch_size=1)
 
-        model = HypergraphResNet(num_nodes=self.num_nodes, hidden1=self.params.hidden1, hidden2=self.params.hidden2, dropout=self.params.dropout)
+        model = HypergraphResNet(num_nodes=self.num_nodes, hidden1=self.params.hidden1, hidden2=self.params.hidden2, hidden3=self.params.hidden3, dropout=self.params.dropout)
         model = model.to(self.device)
         optimizer = torch.optim.Adam(model.parameters(), lr=self.params.lr, weight_decay=self.params.weight_decay)
         self.train_model(model, optimizer, train_loader, self.params.epochs)
@@ -255,11 +261,11 @@ class HGCN():
         logging.info(f"Results saved in {filename}")
         print(f"Results saved in {filename}")
 
-def exec_sim(dataset, category, output_res, output_mat, lr, weight_decay, batch_size, epochs, hidden1, hidden2, dropout):
+def exec_sim(dataset, category, output_res, output_mat, lr, weight_decay, batch_size, epochs, hidden1, hidden2, hidden3, dropout):
 
     torch_geometric.seed_everything(42)
 
-    params = Params(category, lr, weight_decay, batch_size, epochs, hidden1, hidden2, dropout)
+    params = Params(category, lr, weight_decay, batch_size, epochs, hidden1, hidden2, hidden3, dropout)
     hgcn = HGCN(params)
 
     n_fold = len(dataset.keys())
