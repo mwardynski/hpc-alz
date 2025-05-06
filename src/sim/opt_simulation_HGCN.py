@@ -17,8 +17,9 @@ def objective(trial):
     hidden2 = trial.suggest_categorical('hidden2', [64, 128, 256])
     hidden3 = trial.suggest_categorical('hidden3', [16, 32, 64])
     dropout = trial.suggest_categorical('dropout', [0.2, 0.3, 0.5])
+    negative_slope = trial.suggest_categorical('negative_slope', [0.01, 0.05, 0.1, 0.2])
     
-    return simulation_HGCN.exec_sim(converted_dataset, category, output_res, output_mat, lr, weight_decay, batch_size, epochs, hidden1, hidden2, hidden3, dropout)
+    return simulation_HGCN.exec_sim(converted_dataset, category, output_res, output_mat, lr, weight_decay, batch_size, epochs, hidden1, hidden2, hidden3, dropout, negative_slope)
 
 def read_configs():
     with open('../../config.yaml', 'r') as f:

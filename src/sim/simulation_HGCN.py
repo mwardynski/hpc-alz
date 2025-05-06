@@ -47,7 +47,7 @@ date = datetime.now().strftime('%y-%m-%d_%H:%M:%S')
 digits = 4
 
 class Params():
-    def __init__(self, category, lr, weight_decay, batch_size, epochs, hidden1, hidden2, hidden3, dropout):
+    def __init__(self, category, lr, weight_decay, batch_size, epochs, hidden1, hidden2, hidden3, dropout, negative_slope):
         self.category = category
         self.lr = lr
         self.weight_decay = weight_decay
@@ -57,6 +57,7 @@ class Params():
         self.hidden2 = hidden2
         self.hidden3 = hidden3
         self.dropout = dropout
+        self.negative_slope = negative_slope
 
 
 class Results():
@@ -88,13 +89,14 @@ class HypergraphNet(torch.nn.Module):
         return x
         
 class HypergraphResNet(torch.nn.Module):
-    def __init__(self, num_nodes, hidden1=32, hidden2=64, hidden3=32, dropout=0.2):
+    def __init__(self, num_nodes, hidden1=32, hidden2=64, hidden3=32, dropout=0.2, negative_slope=0.01):
         super().__init__()
         self.conv1 = HypergraphConv(1, hidden1)
         self.conv2 = HypergraphConv(hidden1, hidden2)
         self.conv3 = HypergraphConv(hidden2, hidden3)
         self.conv4 = HypergraphConv(hidden3, 1)
         self.dropout = dropout
+        self.negative_slope = negative_slope
         self.num_nodes = num_nodes
 
     def forward(self, x, edge_index, original_node_ranges=None):
@@ -102,15 +104,15 @@ class HypergraphResNet(torch.nn.Module):
         baseline = x
         h = x
         h = self.conv1(h, edge_index)
-        h = F.relu(h)
+        h = F.leaky_relu(h, negative_slope=self.negative_slope)
         h = F.dropout(h, p=self.dropout, training=self.training)
         
         h = self.conv2(h, edge_index)
-        h = F.relu(h)
+        h = F.leaky_relu(h, negative_slope=self.negative_slope)
         h = F.dropout(h, p=self.dropout, training=self.training)
 
         h = self.conv3(h, edge_index)
-        h = F.relu(h)
+        h = F.leaky_relu(h, negative_slope=self.negative_slope)
         h = F.dropout(h, p=self.dropout, training=self.training)
 
         delta = self.conv4(h, edge_index)
@@ -185,7 +187,12 @@ class HGCN():
         train_loader = DataLoader(list(train_set.values()), batch_size=self.params.batch_size)
         test_loader = DataLoader(list(test_set.values()), batch_size=1)
 
-        model = HypergraphResNet(num_nodes=self.num_nodes, hidden1=self.params.hidden1, hidden2=self.params.hidden2, hidden3=self.params.hidden3, dropout=self.params.dropout)
+        model = HypergraphResNet(num_nodes=self.num_nodes,
+                                 hidden1=self.params.hidden1,
+                                 hidden2=self.params.hidden2,
+                                 hidden3=self.params.hidden3,
+                                 dropout=self.params.dropout,
+                                 negative_slope=self.params.negative_slope)
         model = model.to(self.device)
         optimizer = torch.optim.Adam(model.parameters(), lr=self.params.lr, weight_decay=self.params.weight_decay)
         self.train_model(model, optimizer, train_loader, self.params.epochs)
@@ -237,11 +244,14 @@ class HGCN():
         out_file = open(filename, 'w')
         out_file.write(f"Category: {self.params.category}\n")
         out_file.write(f"LR: {self.params.lr}\n")
+        out_file.write(f"Weight Decay: {self.params.weight_decay}\n")
         out_file.write(f"Batch: {self.params.batch_size}\n")
         out_file.write(f"Epochs: {self.params.epochs}\n")
         out_file.write(f"Hidden1: {self.params.hidden1}\n")
         out_file.write(f"Hidden2: {self.params.hidden2}\n")
+        out_file.write(f"Hidden3: {self.params.hidden3}\n")
         out_file.write(f"Dropout: {self.params.dropout}\n")
+        out_file.write(f"Negative Slope: {self.params.negative_slope}\n")
         out_file.write(f"Subjects: {len(dataset.keys())}\n")
         out_file.write(f"Total time (s): {format(total_time, '.2f')}\n")
         out_file.write(results.pt_avg.get_string()+'\n')
@@ -250,22 +260,25 @@ class HGCN():
         logging.info('***********************')
         logging.info(f"Category: {self.params.category}")
         logging.info(f"LR: {self.params.lr}\n")
+        logging.info(f"Weight Decay: {self.params.weight_decay}\n")
         logging.info(f"Batch: {self.params.batch_size}\n")
         logging.info(f"Epochs: {self.params.epochs}\n")
         logging.info(f"Hidden1: {self.params.hidden1}\n")
         logging.info(f"Hidden2: {self.params.hidden2}\n")
+        logging.info(f"Hidden3: {self.params.hidden3}\n")
         logging.info(f"Dropout: {self.params.dropout}\n")
+        logging.info(f"Negative Slope: {self.params.negative_slope}\n")
         logging.info(f"Subjects: {len(dataset.keys())}")
         logging.info(f"Total time (s): {format(total_time, '.2f')}")
         logging.info('***********************')
         logging.info(f"Results saved in {filename}")
         print(f"Results saved in {filename}")
 
-def exec_sim(dataset, category, output_res, output_mat, lr, weight_decay, batch_size, epochs, hidden1, hidden2, hidden3, dropout):
+def exec_sim(dataset, category, output_res, output_mat, lr, weight_decay, batch_size, epochs, hidden1, hidden2, hidden3, dropout, negative_slope):
 
     torch_geometric.seed_everything(42)
 
-    params = Params(category, lr, weight_decay, batch_size, epochs, hidden1, hidden2, hidden3, dropout)
+    params = Params(category, lr, weight_decay, batch_size, epochs, hidden1, hidden2, hidden3, dropout, negative_slope)
     hgcn = HGCN(params)
 
     n_fold = len(dataset.keys())
