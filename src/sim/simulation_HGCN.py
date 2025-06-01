@@ -341,8 +341,6 @@ if __name__=="__main__":
     dropout = float(sys.argv[9]) if len(sys.argv) > 9 else 0.3# = trial.suggest_categorical('dropout', [0.2, 0.3, 0.5])
     negative_slope = float(sys.argv[10]) if len(sys.argv) > 10 else 0.05# = trial.suggest_categorical('negative_slope', [0.01, 0.05, 0.1, 0.2])
 
-    category = 'ALL'
-
     with open('../../config.yaml', 'r') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
         
