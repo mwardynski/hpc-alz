@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH --job-name=alz-hgcn-gpu-LMCI
+#SBATCH --output=alz-hgcn-LMCI.out
+#SBATCH --error=alz-hgcn-LMCI.err
+#SBATCH --time=30:00:00
+#SBATCH --partition=plgrid-gpu-v100
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=32GB
+#SBATCH --account=plgalzheimergnn-gpu
+#SBATCH --gres=gpu
+
+module load python
+
+source /net/afscra/people/plgmwardynski/alzenv/bin/activate
+
+cd ../src/sim
+srun python simulation_HGCN.py LMCI 0.01 1e-05 8 30 32 256 64 0.5 0.01

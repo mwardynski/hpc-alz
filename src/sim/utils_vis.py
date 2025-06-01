@@ -78,7 +78,7 @@ def save_prediction_plot(baseline, prediction, followup, subject, filepath, erro
     
     return 
 
-def save_avg_regional_errors(avg_reg_err, avg_reg_err_filename):
+def save_avg_regional_errors(avg_reg_err, avg_reg_err_filename, fig_format):
     #for i in avg_reg_err:
     #    plt.hist(i)
     
@@ -98,7 +98,7 @@ def save_avg_regional_errors(avg_reg_err, avg_reg_err_filename):
     plt.xlabel('ROI (166 regions of AAL3 atlas)', fontsize=18)
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig(avg_reg_err_filename)
+    plt.savefig(avg_reg_err_filename+'.'+fig_format, format=fig_format)
     
 def visualize_error(error):
     plt.figure(figsize=(15, 5))

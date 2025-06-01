@@ -17,6 +17,8 @@ from utils import *
 from utils_vis import *
 
 
+from hg_converter import HG_Converter
+
 
 from prettytable import PrettyTable
 
@@ -224,7 +226,7 @@ class HGCN():
                 continue
             avg_reg_err = np.mean(cat_reg_err, axis=0)
             avg_reg_err_filename = output_res +f'{sim_name}_region_{c}_{date}.png'
-            save_avg_regional_errors(avg_reg_err, avg_reg_err_filename)
+            save_avg_regional_errors(avg_reg_err, avg_reg_err_filename, "svg")
             np.savetxt(f"{output_mat}{sim_name}_{c}_regions_{date}.csv", avg_reg_err, delimiter=',')
             avg_mse = np.mean(cat_total_mse, axis=0)
             std_mse = np.std(cat_total_mse, axis=0)
@@ -237,7 +239,7 @@ class HGCN():
             results.pt_avg.add_row([self.params.category, round(np.mean(list(results.total_mse.values())), digits), round(np.std(list(results.total_mse.values())), digits), round(np.mean(list(results.total_pcc.values())), digits), round(np.std(list(results.total_pcc.values())), digits)])
             avg_reg_err = np.mean(list(results.total_reg_err.values()), axis=0)
             avg_reg_err_filename = output_res +f'{sim_name}_region_{self.params.category}_{date}.png'
-            save_avg_regional_errors(avg_reg_err, avg_reg_err_filename)
+            save_avg_regional_errors(avg_reg_err, avg_reg_err_filename, "svg")
             np.savetxt(f"{output_mat}{sim_name}_{self.params.category}_regions_{date}.csv", avg_reg_err, delimiter=',')
 
         filename = f"{output_res}{sim_name}_{datetime.now().strftime('%y-%m-%d_%H:%M:%S')}.txt"
@@ -318,7 +320,27 @@ def exec_sim(dataset, category, output_res, output_mat, lr, weight_decay, batch_
     return avg_mse
 
 
+def convert_dataset(hyperedge_value):
+    with open(dataset_path, 'r') as f:
+        dataset = json.load(f)
+
+    num_cores = os.cpu_count()
+    hg_converter = HG_Converter(hyperedge_value)
+    return hg_converter.convert_dataset(dataset, num_cores)
+
+
 if __name__=="__main__":
+    category = sys.argv[1] if len(sys.argv) > 1 else 'ALL'
+    lr = float(sys.argv[2]) if len(sys.argv) > 2 else 0.001 #= trial.suggest_categorical('lr', [0.0001, 0.0005, 0.001, 0.005, 0.01])
+    weight_decay = float(sys.argv[3]) if len(sys.argv) > 3 else 1e-4# = trial.suggest_categorical('weight_decay', [0, 1e-4, 1e-5])
+    batch_size = int(sys.argv[4]) if len(sys.argv) > 4 else 16# = trial.suggest_categorical('batch_size', [1, 4, 8, 16, 32, 64])
+    epochs = int(sys.argv[5]) if len(sys.argv) > 5 else 60# = trial.suggest_categorical('epochs', [30, 60, 90])
+    hidden1 = int(sys.argv[6]) if len(sys.argv) > 6 else 32# = trial.suggest_categorical('hidden1', [16, 32, 64])
+    hidden2 = int(sys.argv[7]) if len(sys.argv) > 7 else 128# = trial.suggest_categorical('hidden2', [64, 128, 256])
+    hidden3 = int(sys.argv[8]) if len(sys.argv) > 8 else 32# = trial.suggest_categorical('hidden3', [16, 32, 64])
+    dropout = float(sys.argv[9]) if len(sys.argv) > 9 else 0.3# = trial.suggest_categorical('dropout', [0.2, 0.3, 0.5])
+    negative_slope = float(sys.argv[10]) if len(sys.argv) > 10 else 0.05# = trial.suggest_categorical('negative_slope', [0.01, 0.05, 0.1, 0.2])
+
     category = 'ALL'
 
     with open('../../config.yaml', 'r') as f:
@@ -332,8 +354,10 @@ if __name__=="__main__":
     with open(dataset_path, 'r') as f:
         dataset = json.load(f)
 
+    hyperedge_value = 'ones' # one from {zeros, ones, proportional}
+    converted_dataset = convert_dataset(hyperedge_value)
 
-    exec_sim(dataset, output_res, output_mat) 
+    exec_sim(converted_dataset, category, output_res, output_mat, lr, weight_decay, batch_size, epochs, hidden1, hidden2, hidden3, dropout, negative_slope)
 
     
 
