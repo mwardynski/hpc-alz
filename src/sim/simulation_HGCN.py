@@ -168,8 +168,9 @@ class HGCN():
 
     def output_subject_result(self, subj, t0_concentration, t1_concentration, t1_concentration_pred, mse, pcc, results):
         reg_err = np.abs(t1_concentration_pred - t1_concentration)
-            
-        save_prediction_plot(t0_concentration, t1_concentration_pred, t1_concentration, subj, subj + 'test/' + sim_name + '_' + date + '.png', mse, pcc)
+
+        fig_format = 'svg'    
+        save_prediction_plot(t0_concentration, t1_concentration_pred, t1_concentration, subj, subj + 'test/' + sim_name + '_' + date + '.' + fig_format, fig_format, mse, pcc)
         logging.info(f"Saving prediction in {subj + 'test/' + sim_name + '_' + date + '.png'}")
         save_terminal_concentration(subj + 'test/', t0_concentration, sim_name + '_t0')
         save_terminal_concentration(subj + 'test/', t1_concentration_pred, sim_name + '_t1_pred')

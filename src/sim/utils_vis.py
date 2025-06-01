@@ -49,7 +49,7 @@ def visualize_diffusion_timeplot(matrix, timestep, total_time, save_dir=None):
         plt.savefig(os.path.join(save_dir, 'diffusion_over_time.png'))
     plt.show() 
     
-def save_prediction_plot(baseline, prediction, followup, subject, filepath, error=None, corr_coeff=None):
+def save_prediction_plot(baseline, prediction, followup, subject, filepath, fig_format, error=None, corr_coeff=None):
     plt.switch_backend('Agg')     
     plt.figure(figsize=(18, 10))
     plt.plot(baseline, '-', marker='o', c='#390099', label='baseline', linewidth=1)
@@ -73,7 +73,7 @@ def save_prediction_plot(baseline, prediction, followup, subject, filepath, erro
     plt.tight_layout()
     
     if error is not None: plt.title(f'Subject: {subject.split(os.sep)[-2]}, MSE: {round(error, digits)}, PCC: {round(corr_coeff, digits)}', fontsize=22)
-    plt.savefig(filepath, bbox_inches='tight')
+    plt.savefig(filepath, bbox_inches='tight', format=fig_format)
     plt.close()
     
     return 
