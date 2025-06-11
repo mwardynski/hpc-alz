@@ -210,7 +210,7 @@ class HGCN():
 
 
     def output_run_summary(self, sim_name, date, output_res, output_mat, dataset, results, total_time):
-        categories = ['AD', 'LMCI', 'MCI', 'EMCI', 'CN', 'Decreasing', 'Increasing']
+        categories = ['AD', 'LMCI', 'MCI', 'EMCI', 'CN']
         
         
         for c in categories:

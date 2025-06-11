@@ -3,7 +3,7 @@
 #SBATCH --output=alz-hgcn-all-Decreasing.out
 #SBATCH --error=alz-hgcn-Decreasing.err
 #SBATCH --time=30:00:00
-#SBATCH --partition=plgrid-gpu-v100
+#SBATCH --partition=plgrid-gpu-a100
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
 #SBATCH --account=plgalzheimergnn-gpu
