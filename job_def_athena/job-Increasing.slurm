@@ -6,10 +6,11 @@
 #SBATCH --partition=plgrid-gpu-a100
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=32GB
-#SBATCH --account=plgalzheimergnn-gpu
+#SBATCH --account=plgalzheimergnn2-gpu-a100
 #SBATCH --gres=gpu
 
-module load python
+module load GCCcore/13.2.0
+module load Python/3.11.5
 
 source /net/tscratch/people/plgmwardynski/alzenv/bin/activate
 
