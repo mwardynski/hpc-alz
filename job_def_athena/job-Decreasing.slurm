@@ -5,7 +5,7 @@
 #SBATCH --time=30:00:00
 #SBATCH --partition=plgrid-gpu-a100
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=32GB
+#SBATCH --mem=48GB
 #SBATCH --account=plgalzheimergnn2-gpu-a100
 #SBATCH --gres=gpu
 
