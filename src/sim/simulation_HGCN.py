@@ -317,7 +317,7 @@ def exec_sim(dataset, category, output_res, output_mat, lr, weight_decay, batch_
 
     hgcn.output_run_summary(sim_name, date, output_res, output_mat, dataset, results, total_time)
 
-    avg_mse = round(np.mean(list(results.total_mse.values())), digits)
+    avg_mse = np.mean(list(results.total_mse.values())), digits
     return avg_mse
 
 
