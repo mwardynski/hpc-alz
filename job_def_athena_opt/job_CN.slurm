@@ -16,3 +16,5 @@ source /net/tscratch/people/plgmwardynski/alzenv/bin/activate
 
 cd ../src/sim
 srun python opt_simulation_HGCN.py CN 200
+
+# {'lr': 0.0001, 'weight_decay': 0, 'batch_size': 32, 'epochs': 90, 'hidden1': 16, 'hidden2': 64, 'hidden3': 32, 'dropout': 0.3, 'negative_slope': 0.1}

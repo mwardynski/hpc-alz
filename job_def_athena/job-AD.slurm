@@ -15,4 +15,4 @@ module load Python/3.11.5
 source /net/tscratch/people/plgmwardynski/alzenv/bin/activate
 
 cd ../src/sim
-srun python simulation_HGCN.py ALL 0.005 0 64 90 16 128 16 0.3 0.1
+srun python simulation_HGCN.py AD 0.005 0 64 90 16 128 16 0.3 0.1

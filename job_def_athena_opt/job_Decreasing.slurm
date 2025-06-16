@@ -16,3 +16,5 @@ source /net/tscratch/people/plgmwardynski/alzenv/bin/activate
 
 cd ../src/sim
 srun python opt_simulation_HGCN.py Decreasing 70
+
+# {'lr': 0.001, 'weight_decay': 1e-05, 'batch_size': 4, 'epochs': 90, 'hidden1': 64, 'hidden2': 128, 'hidden3': 16, 'dropout': 0.3, 'negative_slope': 0.05}
