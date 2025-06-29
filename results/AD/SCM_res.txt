@@ -1,0 +1,44 @@
+Category: AD
+Cores: 10
+mu: 0.000313248
+lambdaD: 2.21132399
+I_percentage: 1
+NSteps: 50
+Weights threshold: 0.0
+Weights threshold mode: NO
+Subjects: 24
+Total time (s): 210.44
+Triangles count: 8495.791666666666
++----+---------+--------+-------------+------------+
+| CG | Avg MSE | SD MSE | Avg Pearson | SD Pearson |
++----+---------+--------+-------------+------------+
+| AD |  0.003  |  0.0   |    0.9662   |    0.02    |
++----+---------+--------+-------------+------------+
++------------------------------------------------------------------------------+--------+---------+
+|                                      ID                                      |  MSE   | Pearson |
++------------------------------------------------------------------------------+--------+---------+
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD4009/ | 0.0014 |  0.9351 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD4089/ | 0.0023 |  0.9637 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD4136/ | 0.0068 |  0.9483 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD4215/ | 0.0144 |  0.9713 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD4494/ | 0.0027 |  0.975  |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD4500/ | 0.0008 |  0.978  |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD4568/ | 0.008  |  0.9778 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD4591/ | 0.0007 |  0.9531 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD4686/ | 0.0046 |  0.9743 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6013/ | 0.0006 |  0.9824 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6100/ | 0.0026 |  0.9797 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6142/ | 0.0019 |  0.9815 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6179/ | 0.0013 |  0.9575 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6216/ | 0.0012 |  0.9765 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6264/ | 0.0009 |  0.9256 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6347/ | 0.0015 |  0.9889 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6377/ | 0.005  |  0.9666 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6389/ | 0.003  |  0.9572 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6433/ | 0.0044 |  0.9727 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6549/ | 0.0042 |  0.9167 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6683/ | 0.0017 |  0.9798 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6721/ | 0.0004 |  0.9802 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6784/ | 0.0006 |  0.9747 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_AD/sub-AD6796/ | 0.0007 |  0.9718 |
++------------------------------------------------------------------------------+--------+---------+

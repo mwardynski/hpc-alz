@@ -1,0 +1,51 @@
+Category: MCI
+LR: 0.005
+Weight Decay: 0.0001
+Batch: 8
+Epochs: 60
+Hidden1: 64
+Hidden2: 256
+Hidden3: 16
+Dropout: 0.5
+Negative Slope: 0.01
+Subjects: 30
+Total time (s): 126.25
++-----+---------+--------+-------------+------------+
+|  CG | Avg MSE | SD MSE | Avg Pearson | SD Pearson |
++-----+---------+--------+-------------+------------+
+| MCI |  0.0077 | 0.0061 |    0.7535   |   0.2663   |
++-----+---------+--------+-------------+------------+
++------------------------------------------------------------------+--------+---------+
+|                                ID                                |  MSE   | Pearson |
++------------------------------------------------------------------+--------+---------+
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI0150/ |  0.01  |  0.9108 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI0377/ | 0.0009 |  0.9624 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI0671/ | 0.0019 |  0.9391 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI0908/ | 0.003  |  0.9496 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI1074/ | 0.007  |  0.9609 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI1155/ | 0.0012 |  0.9482 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI1352/ | 0.0044 |  0.9758 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI1378/ | 0.0015 |  0.9339 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI1418/ | 0.0143 |  0.7804 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6033/ | 0.0009 |  0.9551 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6110/ | 0.0114 |  0.2683 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6180/ | 0.0142 |  0.461  |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6222/ | 0.0093 |  0.9594 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6241/ | 0.0213 |  0.9252 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6512/ | 0.0033 |  0.9046 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6541/ | 0.0091 |  0.5406 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6544/ | 0.0156 |  0.3539 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6550/ | 0.0146 |  0.1913 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6591/ | 0.0199 |  0.4567 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6632/ | 0.0016 |  0.9552 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6640/ | 0.0024 |  0.9313 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6702/ | 0.0152 |   0.55  |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6703/ | 0.0136 |  0.328  |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6716/ | 0.0021 |  0.9511 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6724/ | 0.0022 |  0.9416 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6748/ | 0.003  |  0.9264 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6775/ | 0.0133 |  0.2712 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6788/ | 0.0016 |  0.9567 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6830/ | 0.0085 |  0.5073 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-MCI6852/ | 0.0052 |  0.9088 |
++------------------------------------------------------------------+--------+---------+

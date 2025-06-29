@@ -1,0 +1,72 @@
+Category: CN
+LR: 0.0001
+Weight Decay: 1e-05
+Batch: 16
+Epochs: 90
+Hidden1: 64
+Hidden2: 128
+Hidden3: 16
+Dropout: 0.5
+Negative Slope: 0.2
+Subjects: 51
+Total time (s): 501.68
++----+---------+--------+-------------+------------+
+| CG | Avg MSE | SD MSE | Avg Pearson | SD Pearson |
++----+---------+--------+-------------+------------+
+| CN |  0.0043 | 0.0105 |    0.9442   |   0.1004   |
++----+---------+--------+-------------+------------+
++---------------------------------------------------------------+--------+---------+
+|                               ID                              |  MSE   | Pearson |
++---------------------------------------------------------------+--------+---------+
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN0031/ | 0.0015 |  0.9311 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN0074/ | 0.005  |  0.9742 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN0120/ | 0.0052 |  0.9535 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN0337/ | 0.0014 |  0.9554 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN0419/ | 0.0011 |  0.9488 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN0602/ | 0.0009 |  0.9426 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN0610/ | 0.001  |  0.9785 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN0751/ | 0.0006 |  0.9794 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN1190/ | 0.001  |  0.8351 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN1261/ | 0.0006 |  0.9814 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN1280/ | 0.0011 |  0.9765 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4081/ | 0.0008 |  0.9753 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4084/ | 0.071  |  0.2718 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4105/ | 0.0006 |  0.9771 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4119/ | 0.0064 |  0.9745 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4121/ | 0.0004 |  0.9693 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4164/ | 0.0004 |  0.9511 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4213/ | 0.0007 |  0.9678 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4225/ | 0.0005 |  0.9842 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4276/ | 0.0007 |  0.9622 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4278/ | 0.0006 |  0.967  |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4288/ | 0.0062 |  0.9123 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4350/ | 0.0013 |  0.9647 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4387/ | 0.0082 |  0.9625 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4388/ | 0.0013 |  0.9783 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4401/ | 0.0018 |  0.9859 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4441/ | 0.0019 |  0.9653 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4448/ | 0.0018 |  0.9026 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4488/ | 0.0156 |  0.9752 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4516/ | 0.0012 |  0.9885 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4576/ | 0.0011 |  0.9556 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4620/ | 0.0008 |  0.9745 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4637/ | 0.0004 |  0.9769 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4643/ | 0.0193 |  0.9569 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4872/ | 0.0009 |  0.9652 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4900/ | 0.0005 |  0.974  |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4951/ | 0.0011 |  0.9522 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN4952/ | 0.002  |  0.9025 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6007/ | 0.0019 |  0.9732 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6009/ | 0.0007 |  0.9731 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6014/ | 0.0011 |  0.9908 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6067/ | 0.0043 |  0.9698 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6184/ | 0.0006 |  0.9806 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6185/ | 0.0048 |  0.9409 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6323/ | 0.0006 |  0.954  |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6381/ | 0.0066 |  0.9279 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6455/ | 0.0013 |  0.9685 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6470/ | 0.0236 |  0.8286 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6513/ | 0.0028 |  0.951  |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6515/ | 0.0013 |  0.9775 |
+| /net/afscra/people/plgmwardynski/ADNI_derivatives/sub-CN6516/ | 0.001  |  0.9667 |
++---------------------------------------------------------------+--------+---------+

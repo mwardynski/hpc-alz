@@ -1,0 +1,85 @@
+Category: MCI
+Cores: 10
+Subjects: 30
+Training set size: 29
+Testing set size: 1
+Lambda coefficient: 0.0
+Matrix: I
+Binary matrix: yes
+Iterations per patient: 3000000
+Folds: 30
+Elapsed time for training (s): 552.79
+Total time (s): 577.90
++-----+---------------+-------------+------------------+-----------------+
+|  CG | Avg MSE test  | SD MSE test | Avg Pearson test | SD Pearson test |
++-----+---------------+-------------+------------------+-----------------+
+| MCI |     0.0113    |     0.01    |      0.7444      |       0.3       |
++-----+---------------+-------------+------------------+-----------------+
++--------------------------------------------------------------------------+---------------+-------------------+
+|                                    ID                                    | Avg MSE train | Avg Pearson train |
++--------------------------------------------------------------------------+---------------+-------------------+
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI0150/ |     0.0006    |       0.8863      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI0377/ |     0.0006    |       0.9746      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI0671/ |     0.0007    |       0.9733      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI0908/ |     0.0009    |       0.9542      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI1074/ |     0.0037    |       0.8862      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI1155/ |     0.0005    |       0.9746      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI1352/ |     0.0008    |       0.9803      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI1378/ |     0.0005    |       0.9808      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI1418/ |     0.0126    |       0.7735      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6033/ |     0.0005    |        0.97       |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6110/ |     0.0118    |       0.199       |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6180/ |     0.0164    |       0.3439      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6222/ |     0.0088    |       0.6936      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6241/ |     0.0072    |       0.6908      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6512/ |     0.002     |       0.9237      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6541/ |     0.013     |       0.3516      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6544/ |     0.0185    |       0.1182      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6550/ |     0.0167    |      -0.0062      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6591/ |     0.0207    |       0.2688      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6632/ |     0.0006    |       0.9613      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6640/ |     0.0013    |       0.9693      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6702/ |     0.0145    |       0.2093      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6703/ |     0.0147    |       0.226       |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6716/ |     0.0005    |       0.9781      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6724/ |     0.0008    |       0.9663      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6748/ |     0.0013    |       0.9342      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6775/ |     0.015     |       0.2422      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6788/ |     0.0008    |       0.9841      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6830/ |     0.0109    |       0.4169      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6852/ |     0.0025    |       0.9039      |
++--------------------------------------------------------------------------+---------------+-------------------+
++--------------------------------------------------------------------------+--------------+------------------+
+|                                    ID                                    |  MSE  |  Pearson  |
++--------------------------------------------------------------------------+--------------+------------------+
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI0150/ |    0.002     |      0.9053      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI0377/ |    0.0014    |      0.9545      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI0671/ |    0.0017    |      0.9698      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI0908/ |    0.0008    |      0.955       |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI1074/ |    0.0053    |      0.9534      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI1155/ |    0.002     |      0.938       |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI1352/ |    0.0026    |      0.9803      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI1378/ |    0.0014    |      0.9649      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI1418/ |    0.0312    |      0.7971      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6033/ |    0.0009    |      0.9623      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6110/ |    0.0118    |      0.1794      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6180/ |    0.0201    |      0.4498      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6222/ |    0.0169    |      0.968       |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6241/ |    0.0371    |      0.9222      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6512/ |    0.008     |      0.9391      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6541/ |    0.0151    |      0.4758      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6544/ |    0.0267    |      0.3557      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6550/ |    0.0202    |      0.1729      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6591/ |    0.032     |      0.449       |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6632/ |    0.0009    |      0.9418      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6640/ |    0.0059    |      0.9725      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6702/ |    0.0297    |      0.6081      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6703/ |    0.0153    |      0.1584      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6716/ |    0.001     |      0.9599      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6724/ |    0.002     |      0.9724      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6748/ |    0.0013    |      0.9533      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6775/ |    0.0175    |      0.1335      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6788/ |    0.0074    |      0.9569      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6830/ |    0.0112    |      0.4377      |
+| /Users/marcin/Documents/studia/mgr/results/ADNI_derivatives/sub-MCI6852/ |    0.0095    |      0.9444      |
++--------------------------------------------------------------------------+--------------+------------------+

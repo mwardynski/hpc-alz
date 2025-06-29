@@ -1,0 +1,81 @@
+Category: EMCI
+LR: 0.01
+Weight Decay: 0.0
+Batch: 64
+Epochs: 30
+Hidden1: 64
+Hidden2: 256
+Hidden3: 32
+Dropout: 0.2
+Negative Slope: 0.1
+Subjects: 60
+Total time (s): 231.84
++------+---------+--------+-------------+------------+
+|  CG  | Avg MSE | SD MSE | Avg Pearson | SD Pearson |
++------+---------+--------+-------------+------------+
+| EMCI |  0.0064 | 0.0198 |    0.9155   |   0.1968   |
++------+---------+--------+-------------+------------+
++-------------------------------------------------------------------+--------+---------+
+|                                 ID                                |  MSE   | Pearson |
++-------------------------------------------------------------------+--------+---------+
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2007/ | 0.0017 |  0.9739 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2052/ | 0.0094 |  0.9285 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2068/ | 0.0003 |  0.9243 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2146/ | 0.0049 |  0.8865 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2183/ | 0.0043 |  0.9623 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2184/ | 0.0164 |  0.4406 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2187/ | 0.0009 |  0.9842 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2191/ | 0.0019 |  0.9702 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2201/ | 0.0006 |  0.974  |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2213/ | 0.0019 |  0.9366 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2216/ | 0.001  |  0.9527 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2219/ | 0.0008 |  0.9715 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2234/ | 0.0006 |  0.9676 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2238/ | 0.0013 |  0.963  |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2239/ | 0.0028 |  0.9402 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2245/ | 0.0009 |  0.9479 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2263/ | 0.0006 |  0.9739 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2301/ | 0.0016 |  0.9707 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2304/ | 0.0042 |  0.9646 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2308/ | 0.0007 |  0.9771 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2336/ | 0.0047 |  0.9687 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2360/ | 0.0098 |  0.9409 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2367/ | 0.0018 |  0.9533 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2379/ | 0.0033 |  0.9623 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2390/ | 0.001  |  0.9737 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2392/ | 0.0015 |  0.9444 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2405/ | 0.0007 |  0.9632 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI2407/ | 0.0012 |  0.961  |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4051/ | 0.1404 | -0.1343 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4072/ | 0.0026 |  0.9477 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4143/ | 0.0009 |  0.9357 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4168/ | 0.0007 |  0.9675 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4184/ | 0.0006 |  0.9631 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4185/ | 0.001  |  0.9753 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4188/ | 0.0648 |  0.9255 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4199/ | 0.0012 |  0.9778 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4216/ | 0.0005 |  0.9792 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4271/ | 0.0313 | -0.0177 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4272/ | 0.0012 |  0.9683 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4301/ | 0.0009 |  0.9684 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4332/ | 0.0017 |  0.9777 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4380/ | 0.0031 |  0.9139 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4404/ | 0.0011 |  0.9462 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4419/ | 0.0033 |  0.9457 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4434/ | 0.0004 |  0.9758 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4455/ | 0.001  |  0.9672 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4513/ | 0.0017 |  0.9434 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4594/ | 0.003  |  0.9743 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4674/ | 0.0006 |  0.9658 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4706/ | 0.0008 |  0.9636 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4858/ | 0.0021 |  0.9614 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4874/ | 0.0021 |  0.9821 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4891/ | 0.0026 |  0.9684 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4893/ | 0.0048 |  0.9562 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4919/ | 0.0197 |  0.9362 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4926/ | 0.0079 |  0.9711 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4944/ | 0.0011 |  0.9592 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI4974/ | 0.0009 |  0.9535 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI5004/ | 0.0007 |  0.9771 |
+| /net/tscratch/people/plgmwardynski/ADNI_derivatives/sub-EMCI5007/ | 0.0004 |  0.9582 |
++-------------------------------------------------------------------+--------+---------+

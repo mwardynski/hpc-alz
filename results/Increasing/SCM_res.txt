@@ -1,0 +1,137 @@
+Category: Increasing
+Cores: 10
+mu: 0.0004022533770282684
+lambdaD: 1.6387123161916948
+I_percentage: 1
+NSteps: 50
+Weights threshold: 0.0
+Weights threshold mode: NO
+Subjects: 112
+Total time (s): 1560.37
+Triangles count: 10812.0
++------------+---------+--------+-------------+------------+
+|     CG     | Avg MSE | SD MSE | Avg Pearson | SD Pearson |
++------------+---------+--------+-------------+------------+
+|     AD     |  0.002  |  0.0   |    0.9657   |    0.02    |
+|    LMCI    |  0.0036 |  0.01  |    0.9457   |    0.08    |
+|    MCI     |  0.0128 |  0.01  |    0.6915   |    0.31    |
+|    EMCI    |  0.0038 |  0.01  |    0.9162   |    0.2     |
+|     CN     |  0.0065 |  0.01  |    0.9245   |    0.14    |
+| Increasing |  0.0059 |  0.01  |    0.8866   |    0.21    |
++------------+---------+--------+-------------+------------+
++----------------------------------------------------------------------------------------+--------+---------+
+|                                           ID                                           |  MSE   | Pearson |
++----------------------------------------------------------------------------------------+--------+---------+
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-AD4009/  | 0.0015 |  0.9346 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-AD4500/  | 0.0008 |  0.9782 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-AD4591/  | 0.0007 |  0.9522 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-AD4686/  | 0.0046 |  0.9739 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-AD6179/  | 0.0013 |  0.9574 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-AD6347/  | 0.0016 |  0.9887 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-AD6377/  | 0.0051 |  0.9662 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-AD6784/  | 0.0006 |  0.9745 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN0074/  | 0.0054 |  0.972  |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN0120/  | 0.0049 |  0.9527 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN0337/  | 0.0029 |  0.9601 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN0419/  | 0.001  |  0.9483 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN0602/  | 0.0009 |  0.9424 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN0610/  | 0.0011 |  0.9781 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN1190/  | 0.001  |  0.8238 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN1280/  | 0.0014 |  0.9732 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN4084/  | 0.0721 |  0.2472 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN4105/  | 0.0006 |  0.9782 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN4119/  | 0.008  |  0.9752 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN4121/  | 0.0006 |  0.9715 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN4164/  | 0.0006 |  0.9636 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN4278/  | 0.0005 |  0.9692 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN4288/  | 0.007  |  0.9097 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN4388/  | 0.0009 |  0.9777 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN4401/  | 0.0016 |  0.9848 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN4441/  | 0.0025 |  0.966  |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN4576/  | 0.0011 |  0.9575 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN4620/  | 0.0008 |  0.9735 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN6007/  | 0.0016 |  0.9751 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN6184/  | 0.0007 |  0.979  |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN6185/  | 0.0061 |  0.9394 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN6381/  | 0.0097 |  0.9349 |
+|  /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-CN6470/  |  0.03  |  0.8605 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2183/ | 0.0047 |  0.9564 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2184/ | 0.0178 |  0.3855 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2219/ | 0.0005 |  0.9775 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2234/ | 0.0006 |  0.9716 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2263/ | 0.0008 |  0.9652 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2301/ | 0.0027 |  0.9678 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2304/ | 0.0081 |  0.9594 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2308/ | 0.0008 |  0.9768 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2336/ | 0.0026 |  0.9673 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2360/ | 0.0089 |  0.9464 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2367/ | 0.0015 |  0.9514 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2379/ | 0.0029 |  0.9666 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2390/ | 0.0007 |  0.9713 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2392/ | 0.0012 |  0.9446 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI2405/ | 0.0005 |  0.9744 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4072/ | 0.0034 |  0.9506 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4185/ | 0.0016 |  0.9775 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4216/ | 0.0007 |  0.9804 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4271/ | 0.0305 | -0.0071 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4272/ | 0.0009 |  0.9769 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4332/ | 0.0011 |  0.981  |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4380/ | 0.0034 |  0.9239 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4419/ | 0.0033 |  0.9589 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4594/ | 0.0035 |  0.9726 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4858/ | 0.0011 |  0.9657 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4874/ | 0.0012 |  0.9824 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4891/ | 0.0014 |  0.9792 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4893/ | 0.0058 |  0.9647 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI4926/ | 0.0058 |  0.9695 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI5004/ | 0.0008 |  0.9819 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-EMCI5007/ | 0.0004 |  0.9616 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4094/ | 0.0015 |  0.9665 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4115/ | 0.0006 |  0.9193 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4162/ | 0.0009 |  0.947  |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4197/ | 0.0006 |  0.9783 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4210/ | 0.0356 |  0.5534 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4229/ | 0.0009 |  0.9819 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4287/ | 0.0009 |  0.9748 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4354/ | 0.0005 |  0.9546 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4414/ | 0.0048 |  0.9656 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4458/ | 0.0004 |  0.9783 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4510/ | 0.0033 |  0.9604 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4611/ | 0.0007 |  0.9761 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4630/ | 0.0039 |  0.9149 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4631/ | 0.0095 |  0.9743 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4654/ | 0.0017 |  0.9723 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4712/ | 0.0011 |  0.9788 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4722/ | 0.0009 |  0.9557 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4723/ | 0.001  |  0.979  |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4729/ | 0.004  |  0.913  |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4767/ | 0.0016 |  0.974  |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4782/ | 0.0042 |  0.9696 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4807/ | 0.0019 |  0.9138 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4869/ | 0.0055 |  0.9616 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4873/ | 0.0023 |  0.9619 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4902/ | 0.0057 |  0.9671 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI4936/ | 0.001  |  0.9699 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-LMCI5047/ | 0.001  |  0.9706 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI0377/  | 0.0008 |  0.9748 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI0671/  | 0.0008 |  0.9734 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI0908/  | 0.0017 |  0.9701 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI1074/  | 0.0093 |  0.9743 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI1155/  | 0.0006 |  0.9726 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI1378/  | 0.0006 |  0.9807 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6033/  | 0.0008 |  0.9696 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6110/  | 0.0121 |  0.2121 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6180/  | 0.0239 |  0.4776 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6222/  | 0.0228 |  0.9734 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6541/  | 0.019  |  0.5106 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6544/  | 0.0322 |  0.394  |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6550/  | 0.0252 |  0.2168 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6591/  | 0.0383 |  0.4717 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6632/  | 0.0009 |  0.9631 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6702/  | 0.0335 |  0.5949 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6703/  | 0.0151 |  0.2403 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6716/  | 0.001  |  0.9798 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6748/  | 0.0026 |  0.9722 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6775/  | 0.015  |  0.2097 |
+| /Users/mwardynski/Documents/ds/_semestr_8/pp/ADNI_derivatives_Increasing/sub-MCI6830/  | 0.013  |  0.4889 |
++----------------------------------------------------------------------------------------+--------+---------+
