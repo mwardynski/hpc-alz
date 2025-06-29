@@ -1,7 +1,11 @@
 /Users/mwardynski/Documents/ds/_semestr_8/pp
-/net/afscra/people/plgmwardynski
+/net/afscra/people/plgmwardynski -- Ares
+/net/tscratch/people/plgmwardynski -- Athena
+
+/net/tscratch/people/plgmwardynski/ADNI_derivatives/
 
 :%s#/old/path#/new/path#g
+:%s#/Users/mwardynski/Documents/ds/_semestr_8/pp#/net/tscratch/people/plgmwardynski#g
 
 python -m venv myenv
 source myenv/bin/activate

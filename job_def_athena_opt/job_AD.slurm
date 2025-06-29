@@ -17,4 +17,4 @@ source /net/tscratch/people/plgmwardynski/alzenv/bin/activate
 cd ../src/sim
 srun python opt_simulation_HGCN.py AD 300
 
-# {'lr': 0.005, 'weight_decay': 0, 'batch_size': 64, 'epochs': 90, 'hidden1': 16, 'hidden2': 128, 'hidden3': 16, 'dropout': 0.3, 'negative_slope': 0.1}
+    # {'lr': 0.005, 'weight_decay': 0, 'batch_size': 32, 'epochs': 90, 'hidden1': 16, 'hidden2': 128, 'hidden3': 16, 'dropout': 0.3, 'negative_slope': 0.1}
